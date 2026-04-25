@@ -1,131 +1,147 @@
-
 <!DOCTYPE html>
-<html lang="ha">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Idris Trader | Pro Dashboard</title>
-    <style>
-        /* Launuka na Pro (Dark Theme) */
-        :root {
-            --primary-bg: #0b0e11;
-            --card-bg: #1e2329;
-            --accent-gold: #f3ba2f; /* Kalar Binance */
-            --text-color: #eaeaea;
-            --green-glow: #0ecb81;
-        }
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IDRIS TRADER PRO</title>
 
-        body {
-            background-color: var(--primary-bg);
-            color: var(--text-color);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 20px;
-        }
+<style>
+body{
+  margin:0;
+  background:#0b0f14;
+  color:white;
+  font-family:Arial;
+}
 
-        header {
-            text-align: center;
-            padding: 40px 0;
-            border-bottom: 2px solid var(--accent-gold);
-            margin-bottom: 30px;
-        }
+/* HEADER */
+header{
+  text-align:center;
+  padding:20px;
+}
+h1{color:gold;}
 
-        h1 { color: var(--accent-gold); margin: 0; font-size: 2.5rem; }
-        
-        .container {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            max-width: 600px;
-            margin: auto;
-        }
+/* CARD */
+.card{
+  background:#161b22;
+  margin:15px;
+  padding:20px;
+  border-radius:15px;
+}
 
-        .card {
-            background-color: var(--card-bg);
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-            border-left: 5px solid var(--accent-gold);
-        }
+/* BUTTON */
+.btn{
+  padding:12px 20px;
+  background:gold;
+  border:none;
+  border-radius:10px;
+  cursor:pointer;
+  font-weight:bold;
+}
 
-        .signal-title {
-            color: var(--green-glow);
-            font-weight: bold;
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-            display: block;
-        }
+/* PRICE */
+.price{
+  font-size:30px;
+  color:#00ff9c;
+}
 
-        .btn {
-            display: inline-block;
-            background-color: var(--accent-gold);
-            color: black;
-            padding: 12px 25px;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: bold;
-            margin-top: 15px;
-            transition: 0.3s;
-        }
-
-        .btn:hover { background-color: white; }
-
-        .price { font-family: 'Courier New', Courier, monospace; font-size: 1.5rem; }
-    </style>
+/* LOGIN */
+.login{
+  text-align:center;
+  margin:20px;
+}
+input{
+  padding:10px;
+  margin:5px;
+  border-radius:5px;
+  border:none;
+}
+</style>
 </head>
+
 <body>
 
-    <header>
-        <h1>IDRIS TRADER</h1>
-        <img src="https://i.postimg.cc/4nvYBpFL/Screenshot-20260423-200251-TradingView.jpg" alt="EURUSD Analysis" style="width:100%; border-radius:10px;">
+<header>
+<h1>IDRIS TRADER PRO</h1>
+<p>Live Signals + Smart Trading Tools</p>
+</header>
 
-    <div class="container">
-        <div class="card">
+<!-- LIVE PRICE -->
 <div class="card">
-  <span class="signal-title">● LIVE SIGNAL: XAUUSD</span>
-
-  <p>Action: <strong style="color: green;">BUY</strong></p>
-
-  <p class="price">Price: 2345.50</p>
-
-  <p>TP: 2360.00 | SL: 2335.00</p>
+<h3>LIVE GOLD PRICE</h3>
+<p class="price" id="gold">Loading...</p>
 </div>
 
+<!-- SIGNAL -->
 <div class="card">
-  <h3>Risk Calculator</h3>
-  <p>Yi amfani da wannan lissafinmu don kiyaye risk</p>
-
-  <button class="btn" onclick="alert('Working')">Bude</button>
+<h3>LIVE SIGNAL</h3>
+<p>BUY LIMIT</p>
+<p>Entry: 2345.50</p>
+<p>TP: 2360 | SL: 2335</p>
+<button class="btn" onclick="alertSignal()">Get Alert</button>
 </div>
-        </div>
 
-        <div class="card" style="border-left-color: #25D366;">
-            <h3>VIP Mentorship</h3>
-            <p>Koyi SMC Strategy daki-daki da yaren Hausa.</p>
-            <a href="https://wa.me/2349037813557" class="btn" style="background-color: #25D366; color: white;">WhatsApp Mu</a>
-        </div>
-    </div>
+<!-- TRADINGVIEW CHART -->
+<div class="card">
+<h3>Live Chart</h3>
+
+<!-- TradingView Widget -->
+<div class="tradingview-widget-container">
+  <div id="tradingview_chart"></div>
+</div>
+
+<script src="https://s3.tradingview.com/tv.js"></script>
+
 <script>
-    function calculateLot() {
-        // Tambayar mai amfani da website
-        let balance = prompt("Nawa ne jarinka (Balance)?");
-        let risk = prompt("Kashi nawa kake son kashewa (Risk %)?");
-        let sl = prompt("Pips nawa ne Stop Loss dinka?");
+new TradingView.widget({
+  "width": "100%",
+  "height": 300,
+  "symbol": "OANDA:XAUUSD",
+  "interval": "5",
+  "theme": "dark",
+  "style": "1",
+  "locale": "en",
+  "container_id": "tradingview_chart"
+});
+</script>
 
-        if (balance && risk && sl) {
-            // Yin lissafin (irin wanda muka yi a Python)
-            let amountRisked = balance * (risk / 100);
-            let lotSize = amountRisked / sl;
+</div>
 
-            // Nuna sakamako a fuskar waya
-            alert("Sakamako:\n\nKudin da kake risk: $" + amountRisked.toFixed(2) + 
-                  "\nLot Size din da ya kamata ka bude: " + lotSize.toFixed(2));
-        } else {
-            alert("Don Allah shigar da dukkan bayanan lissafin.");
-        }
-    }
+<!-- LOGIN -->
+<div class="card login">
+<h3>VIP Login</h3>
+<input type="text" id="user" placeholder="Username"><br>
+<input type="password" id="pass" placeholder="Password"><br>
+<button class="btn" onclick="login()">Login</button>
+<p id="loginMsg"></p>
+</div>
+
+<script>
+
+// 🔥 FAKE LIVE GOLD PRICE (auto update)
+function updateGold(){
+  let price = (2300 + Math.random()*100).toFixed(2);
+  document.getElementById("gold").innerHTML = price;
+}
+setInterval(updateGold,2000);
+updateGold();
+
+// 🔔 SIGNAL ALERT
+function alertSignal(){
+  alert("🔥 NEW SIGNAL: BUY XAUUSD NOW!");
+}
+
+// 🔐 LOGIN SYSTEM
+function login(){
+  let u = document.getElementById("user").value;
+  let p = document.getElementById("pass").value;
+
+  if(u=="idris" && p=="1234"){
+    document.getElementById("loginMsg").innerHTML="✅ Welcome VIP!";
+  }else{
+    document.getElementById("loginMsg").innerHTML="❌ Wrong login";
+  }
+}
+
 </script>
 
 </body>
 </html>
-
