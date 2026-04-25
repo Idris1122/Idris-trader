@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ha">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Idris Trader | Pro Dashboard</title>
+    <style>
+        /* Launuka na Pro (Dark Theme) */
+        :root {
+            --primary-bg: #0b0e11;
+            --card-bg: #1e2329;
+            --accent-gold: #f3ba2f; /* Kalar Binance */
+            --text-color: #eaeaea;
+            --green-glow: #0ecb81;
+        }
+
+        body {
+            background-color: var(--primary-bg);
+            color: var(--text-color);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 0;
+            border-bottom: 2px solid var(--accent-gold);
+            margin-bottom: 30px;
+        }
+
+        h1 { color: var(--accent-gold); margin: 0; font-size: 2.5rem; }
+        
+        .container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-width: 600px;
+            margin: auto;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            border-left: 5px solid var(--accent-gold);
+        }
+
+        .signal-title {
+            color: var(--green-glow);
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-gold);
+            color: black;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            margin-top: 15px;
+            transition: 0.3s;
+        }
+
+        .btn:hover { background-color: white; }
+
+        .price { font-family: 'Courier New', Courier, monospace; font-size: 1.5rem; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>IDRIS TRADER</h1>
+        <p>Advanced Market Analysis & Signals</p>
+    </header>
+
+    <div class="container">
+        <div class="card">
+            <span class="signal-title">● LIVE SIGNAL: XAUUSD (Gold)</span>
+            <p>Action: <strong style="color: var(--green-glow);">BUY LIMIT</strong></p>
+            <p class="price">Price: 2345.50</p>
+            <p>TP: 2360.00 | SL: 2335.00</p>
+        </div>
+
+        <div class="card">
+            <h3>Risk Calculator</h3>
+            <p>Yi amfani da kwararren lissafinmu don kiyaye jarinka.</p>
+            <a href="#" class="btn">Bude <button onclick="calculateLot()" class="btn">Bude Calculator</button>
+</a>
+        </div>
+
+        <div class="card" style="border-left-color: #25D366;">
+            <h3>VIP Mentorship</h3>
+            <p>Koyi SMC Strategy daki-daki da yaren Hausa.</p>
+            <a href="https://wa.me/2349037813557" class="btn" style="background-color: #25D366; color: white;">WhatsApp Mu</a>
+        </div>
+    </div>
+<script>
+    function calculateLot() {
+        // Tambayar mai amfani da website
+        let balance = prompt("Nawa ne jarinka (Balance)?");
+        let risk = prompt("Kashi nawa kake son kashewa (Risk %)?");
+        let sl = prompt("Pips nawa ne Stop Loss dinka?");
+
+        if (balance && risk && sl) {
+            // Yin lissafin (irin wanda muka yi a Python)
+            let amountRisked = balance * (risk / 100);
+            let lotSize = amountRisked / sl;
+
+            // Nuna sakamako a fuskar waya
+            alert("Sakamako:\n\nKudin da kake risk: $" + amountRisked.toFixed(2) + 
+                  "\nLot Size din da ya kamata ka bude: " + lotSize.toFixed(2));
+        } else {
+            alert("Don Allah shigar da dukkan bayanan lissafin.");
+        }
+    }
+</script>
+
+</body>
+</html>
+
